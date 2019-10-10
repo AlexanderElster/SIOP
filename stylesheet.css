@@ -1,0 +1,33 @@
+.column#spalte1{
+    float: left;
+    width: 33.33%;
+    background-image: url(NY1.jpg);
+    background-size: 100% 100%;
+  }
+
+.column#spalte2 {
+    float: left;
+    width: 33.33%;
+}
+.column#spalte3{
+    float: left;
+    width: 33.33%;
+    background-image: url(NY2.jpg);
+    background-size: 100% 100%;
+}
+h2{
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+p{
+    margin-left: 8px;
+    margin-right: 8px;
+    color: rgb(94, 66, 5);
+}
+form{
+    margin-left: 20%;
+}
+body{
+    background-color: bisque;
+}
