@@ -14,5 +14,7 @@ app.get('/eintrag',(req, res) => {
 app.get('/benutzer',(req,res) => {
   res.json(benutzer);
 });
-  
+
+app.post('/eintrag')
+
 app.listen(3000);

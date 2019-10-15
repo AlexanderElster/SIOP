@@ -3,6 +3,10 @@
   margin-right: auto;
 }
 
+#neuerEintrag {
+  margin-top: 20px;
+}
+
 .column#spalte1{
     float: left;
     width: 33.33%;
