@@ -19,14 +19,13 @@
         </div>
     </span>
     <span id = "TabelleEintraege">
-        <table id="eintraege">
-        </table>
+        <table id="eintraege" border="solid-black"></table>
     </span>
 </body>
 
 <script>
 
-    var eintraege = document.getElement("eintraege");
+    var eintraege = document.getElementById("eintraege");
     let i = 0;
 
     fetch("/eintrag").then(res => {
