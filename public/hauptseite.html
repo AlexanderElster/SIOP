@@ -26,7 +26,6 @@
                 <table id="eintraege" border="solid-black"></table>
             </span>
 
-
             <script>
 
                 var eintraege = document.getElementById("eintraege");
@@ -58,15 +57,15 @@
         </div>
         <div class="column" id="rechtespalte">
             <form id="neuerEintrag">
-                Bezeichnung: </br> <input type="text" name="bezeichnung" required>
+                Bezeichnung: </br> <input type="text" name="bezeichnung" id ="bezeichnung" required>
                 </br>
-                Beschreibung: </br> <input type="text" name="beschreibung" required>
+                Beschreibung: </br> <input type="text" name="beschreibung" id ="beschreibung" required>
                 </br>
-                Ort: </br> <input type="text" name="ort" required>
+                Ort: </br> <input type="text" name="ort" id ="ort" required>
                 </br>
-                Benutzer: </br> <input type="text" name="benutzer" required>
+                Benutzer: </br> <input type="text" name="benutzer" id ="benutzer" required>
                 </br>
-                Kategorie: </br> <input type="text" name="kategorie" required>
+                Kategorie: </br> <input type="text" name="kategorie" id ="kategorie" required>
                 </br>
                 </br>
                 <input type="submit" name="hinzufuegen" value="Hinzufügen">
@@ -75,6 +74,39 @@
             </span>
         </div>
     </div>
+
+    <script>
+        const form = document.querySelector('#neuerEintrag');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const values = Object.fromEntries(new FormData(event.target));
+
+        fetch("/eintrag", {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(values)
+        }).then(res => {
+            return res.json();
+        }).then(eintrag => {
+            var neueZeile = eintraege.insertRow(0);
+                        var neueZelle0 = neueZeile.insertCell(0);
+                        var neueZelle1 = neueZeile.insertCell(1);
+                        var neueZelle2 = neueZeile.insertCell(2);
+                        var neueZelle3 = neueZeile.insertCell(3);
+                        var neueZelle4 = neueZeile.insertCell(4);
+
+                        neueZelle0.innerHTML = document.querySelector("#bezeichnung").value;
+                        neueZelle1.innerHTML = document.querySelector("#beschreibung").value;
+                        neueZelle2.innerHTML = document.querySelector("#ort").value;
+                        neueZelle3.innerHTML = document.querySelector("#benutzer").value;
+                        neueZelle4.innerHTML = document.querySelector("#kategorie").value;
+        });
+    });
+    </script>
 </body>
 
 </html>

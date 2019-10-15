@@ -15,6 +15,12 @@ app.get('/benutzer',(req,res) => {
   res.json(benutzer);
 });
 
-app.post('/eintrag')
+app.post('/eintrag', (req, res) => {
+  const neuerEintrag = req.body;
+
+  eintrag.push(neuerEintrag);
+
+  res.status(201).json(eintrag);
+});
 
 app.listen(3000);
