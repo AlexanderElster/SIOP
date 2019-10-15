@@ -1,10 +1,20 @@
+.column#linkespalte{
+  float: left;
+  width: 75%;
+}
+.column#spalterechts{
+  float: left;
+  width: 25%;
+  vertical-align: middle;
+}
 #eintraege {
   margin-left: auto;
-  margin-right: auto;
 }
 
 #neuerEintrag {
   margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .column#spalte1{

@@ -18,53 +18,63 @@
             <p style="color:bisque;">sharing is our passion.</p>
         </div>
     </span>
-    <span id="TabelleEintraege">
-        <table id="eintraege" border="solid-black"></table>
-    </span>
+
+    <div class="row">
+        <div class="column" id="linkespalte">
+
+            <span id="TabelleEintraege">
+                <table id="eintraege" border="solid-black"></table>
+            </span>
 
 
-<script>
+            <script>
 
-    var eintraege = document.getElementById("eintraege");
-    let i = 0;
+                var eintraege = document.getElementById("eintraege");
+                let i = 0;
 
-    fetch("/eintrag").then(res => {
-        return res.json();
-    }).then(eintrag => {
-        eintrag.forEach(eintrag => {
+                fetch("/eintrag").then(res => {
+                    return res.json();
+                }).then(eintrag => {
+                    eintrag.forEach(eintrag => {
 
-            var neueZeile = eintraege.insertRow(i);
-            i++;
-            var neueZelle0 = neueZeile.insertCell(0);
-            var neueZelle1 = neueZeile.insertCell(1);
-            var neueZelle2 = neueZeile.insertCell(2);
-            var neueZelle3 = neueZeile.insertCell(3);
-            var neueZelle4 = neueZeile.insertCell(4);
+                        var neueZeile = eintraege.insertRow(i);
+                        i++;
+                        var neueZelle0 = neueZeile.insertCell(0);
+                        var neueZelle1 = neueZeile.insertCell(1);
+                        var neueZelle2 = neueZeile.insertCell(2);
+                        var neueZelle3 = neueZeile.insertCell(3);
+                        var neueZelle4 = neueZeile.insertCell(4);
 
-            neueZelle0.innerHTML = eintrag.bezeichnung;
-            neueZelle1.innerHTML = eintrag.beschreibung;
-            neueZelle2.innerHTML = eintrag.Ort;
-            neueZelle3.innerHTML = eintrag.benutzer;
-            neueZelle4.innerHTML = eintrag.kategorie;
+                        neueZelle0.innerHTML = eintrag.bezeichnung;
+                        neueZelle1.innerHTML = eintrag.beschreibung;
+                        neueZelle2.innerHTML = eintrag.Ort;
+                        neueZelle3.innerHTML = eintrag.benutzer;
+                        neueZelle4.innerHTML = eintrag.kategorie;
 
-        });
-    });
-</script>
-<span>
-    <form id="neuerEintrag">
-        Bezeichnung:    </br> <input type="text" name="bezeichnung" required>
-    </br>
-        Beschreibung:   </br> <input type="text" name="beschreibung" required>
-    </br>
-        Ort:            </br> <input type="text" name= "ort" required>
-    </br>
-        Benutzer:       </br> <input type="text" name= "benutzer" required>
-    </br>
-        Kategorie:      </br> <input type="text" name= "kategorie" required>
-
-    </form>
-</span>
-
+                    });
+                });
+            </script>
+            <span>
+        </div>
+        <div class="column" id="rechtespalte">
+            <form id="neuerEintrag">
+                Bezeichnung: </br> <input type="text" name="bezeichnung" required>
+                </br>
+                Beschreibung: </br> <input type="text" name="beschreibung" required>
+                </br>
+                Ort: </br> <input type="text" name="ort" required>
+                </br>
+                Benutzer: </br> <input type="text" name="benutzer" required>
+                </br>
+                Kategorie: </br> <input type="text" name="kategorie" required>
+                </br>
+                </br>
+                <input type="submit" name="hinzufuegen" value="Hinzufügen">
+            
+            </form>
+            </span>
+        </div>
+    </div>
 </body>
 
 </html>
