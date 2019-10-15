@@ -1,3 +1,8 @@
+#eintraege {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .column#spalte1{
     float: left;
     width: 33.33%;
