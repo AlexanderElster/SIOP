@@ -23,4 +23,8 @@ app.post('/eintrag', (req, res) => {
   res.status(201).json(eintrag);
 });
 
+app.delete('/eintrag/:id', (req, res) => {
+  req.params.id;
+});
+
 app.listen(3000);

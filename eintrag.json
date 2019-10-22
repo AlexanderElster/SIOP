@@ -1,12 +1,12 @@
 [
-    {"id" : 1, "bezeichnung" : "Hollandrad", "beschreibung" : "Ein super tolles Hollandrad", "Ort" : "Stuttgart-Ost", "benutzer" : "Herbert", "kategorie" : "mobilität"},
-    {"id" : 2, "bezeichnung" : "Laufrad", "beschreibung" : "Ein wunderbares Laufrad", "Ort" : "Stuttgart-Mitte", "benutzer" : "Sibille", "kategorie" : "Sport & Freizeit"},
-    {"id" : 3, "bezeichnung" : "E-Roller", "beschreibung" : "nagelneuer umweltfreundlicher E-Roller", "Ort" : "Stuttgart-Vaihingen", "benutzer" : "Sabine", "kategorie" : "mobilität"},
-    {"id" : 4, "bezeichnung" : "Inline-Skater", "beschreibung" : "kaum getragene Inliner in Größe 39", "Ort" : "Bad Cannstatt", "benutzer" : "Anita", "kategorie" : "Sport & Freizeit"},
-    {"id" : 5, "bezeichnung" : "Bohrmaschine", "beschreibung" : "durchschlagkräftige Bohrmaschine mit wenigen Betriebsstunden", "Ort" : "Stuttgart-Nord", "benutzer" : "Klaus", "kategorie" : "Handwerk"},
-    {"id" : 6, "bezeichnung" : "Elektro-Herdplatte", "beschreibung" : "Elektro-Herdplatte für einige Wochen zu vergeben", "Ort" : "Stuttgart-Süd", "benutzer" : "Rita", "kategorie" : "Küche"},
-    {"id" : 7, "bezeichnung" : "Thermomix", "beschreibung" : "reibungslos funktionierender Thermomix kurzfristig abzugeben", "Ort" : "Stuttgart-Mitte", "benutzer" : "Sibille", "kategorie" : "Küche"},
-    {"id" : 8, "bezeichnung" : "Schlittschuhe", "beschreibung" : "Schlittschuhe Größe 48 über den Sommer zu vergeben", "Ort" : "Stuttgart-Vaihingen", "benutzer" : "Frank", "kategorie" : "Sport & Freizeit"},
-    {"id" : 9, "bezeichnung" : "Saftpresse", "beschreibung" : "Einwandfrei funktionierende Saftpresse über Auslandsaufenthalt abzugeben", "Ort" : "Stuttgart-Feuerbach", "benutzer" : "Simone", "kategorie" : "Küche"},
-    {"id" : 10, "bezeichnung" : "Waveboard", "beschreibung" : "Waveboard zu verleihen", "Ort" : "Stuttgart-Süd", "benutzer" : "Daniel", "kategorie" : "Sport & Freizeit"}
+    {"id" : 1, "bezeichnung" : "Hollandrad", "beschreibung" : "Ein super tolles Hollandrad", "ort" : "Stuttgart-Ost", "benutzer" : "Herbert", "kategorie" : "mobilität"},
+    {"id" : 2, "bezeichnung" : "Laufrad", "beschreibung" : "Ein wunderbares Laufrad", "ort" : "Stuttgart-Mitte", "benutzer" : "Sibille", "kategorie" : "Sport & Freizeit"},
+    {"id" : 3, "bezeichnung" : "E-Roller", "beschreibung" : "nagelneuer umweltfreundlicher E-Roller", "ort" : "Stuttgart-Vaihingen", "benutzer" : "Sabine", "kategorie" : "mobilität"},
+    {"id" : 4, "bezeichnung" : "Inline-Skater", "beschreibung" : "kaum getragene Inliner in Größe 39", "ort" : "Bad Cannstatt", "benutzer" : "Anita", "kategorie" : "Sport & Freizeit"},
+    {"id" : 5, "bezeichnung" : "Bohrmaschine", "beschreibung" : "durchschlagkräftige Bohrmaschine mit wenigen Betriebsstunden", "ort" : "Stuttgart-Nord", "benutzer" : "Klaus", "kategorie" : "Handwerk"},
+    {"id" : 6, "bezeichnung" : "Elektro-Herdplatte", "beschreibung" : "Elektro-Herdplatte für einige Wochen zu vergeben", "ort" : "Stuttgart-Süd", "benutzer" : "Rita", "kategorie" : "Küche"},
+    {"id" : 7, "bezeichnung" : "Thermomix", "beschreibung" : "reibungslos funktionierender Thermomix kurzfristig abzugeben", "ort" : "Stuttgart-Mitte", "benutzer" : "Sibille", "kategorie" : "Küche"},
+    {"id" : 8, "bezeichnung" : "Schlittschuhe", "beschreibung" : "Schlittschuhe Größe 48 über den Sommer zu vergeben", "ort" : "Stuttgart-Vaihingen", "benutzer" : "Frank", "kategorie" : "Sport & Freizeit"},
+    {"id" : 9, "bezeichnung" : "Saftpresse", "beschreibung" : "Einwandfrei funktionierende Saftpresse über Auslandsaufenthalt abzugeben", "ort" : "Stuttgart-Feuerbach", "benutzer" : "Simone", "kategorie" : "Küche"},
+    {"id" : 10, "bezeichnung" : "Waveboard", "beschreibung" : "Waveboard zu verleihen", "ort" : "Stuttgart-Süd", "benutzer" : "Daniel", "kategorie" : "Sport & Freizeit"}
 ]
