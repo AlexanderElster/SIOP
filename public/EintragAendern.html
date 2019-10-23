@@ -31,24 +31,27 @@
             Kategorie: </br> <input type="text" name="kategorie" id ="kategorie" required>
             </br>
             </br>
-            <button onclick="updateToggle(id)" type="submit" name="hinzufuegen" value="Hinzufügen">Hinzufügen</button>
+            
         </form>
-
+        <button onclick="getEintrag(id);" type="submit" name="hinzufuegen" value="Hinzufügen">Hinzufügen</button>
         <script>
             var url_string = window.location.href;
             var url = new URL(url_string);
             var id = url.searchParams.get("eid");
             console.log(id); 
 
-            async function getTicket(eintragid) {
-            let response = await fetch('/eintrag/' + eintragid);
-            let data = await response.json().then(resData => { return resData });
-            console.log(data);
-            return data;
-        }
+            async function getEintrag(id) {
 
-            async function eintragAendern(e1) {
-            await fetch('/eintrag/' + e1.id, {
+            let response = await fetch('/eintrag1/' + id);
+            let daten  = await response.json().then(resData => {return resData});
+            
+            console.log(daten);
+            }
+
+            /*
+
+            function updateEintrag(id) {
+            fetch('/eintrag/' + id, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
@@ -56,10 +59,14 @@
             body: JSON.stringify(e1)
             })
                 .then(res => res.json())
-                .then(eintrag => {
-                console.log(eintrag);
+                .then(e1 => {
+                var e = e1;
+                console.log(e1);
             });
+
         }
+
+        */
         </script>
 </body>
 
