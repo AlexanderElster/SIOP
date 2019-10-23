@@ -36,11 +36,11 @@
                 }).then(eintrag => {
                     eintrag.forEach(eintrag => {
 
-                        var button = document.createElement("input");
-                        button.type = "button";
+                        var button = document.createElement("button");
+                        button.type = "submit";
                         button.id = eintrag.id;
-                        button.value = "Löschen";
-                        button.onclick= loeschen(button.id);
+                        button.innerText = "Löschen";
+                        
 
                         var neueZeile = eintraege.insertRow(i);
                         i++;
@@ -82,7 +82,7 @@
             </span>
         </div>
     </div>
-
+    <button onclick = "loeschen(11); window.location.reload();"></button>
     <script>
         const form = document.querySelector('#neuerEintrag');
 
@@ -102,16 +102,15 @@
         });
     });
 
-    function loeschen(id) {
-        fetch("/eintrag/" + id, {
-            method: 'DELETE',
-        }).then(() => {
-            console.log('removed');
-        }).catch(err => {
-            console.error(err);
-        });
-    }
-
+    async function loeschen(id) {
+    await fetch('/eintrag/' + id, {
+        method : 'DELETE',
+    })
+    .then(res => res.json())
+    .then(eintrag => {
+        console.log(eintrag);
+    });
+}
     </script>
 </body>
 

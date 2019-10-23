@@ -7,9 +7,17 @@ const benutzer = require('./benutzer.json');
 app.use(express.static('public'));
 app.use(express.json());
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 app.get('/eintrag',(req, res) => {
   res.json(eintrag);
 });
+
 
 app.get('/benutzer',(req,res) => {
   res.json(benutzer);
@@ -24,7 +32,12 @@ app.post('/eintrag', (req, res) => {
 });
 
 app.delete('/eintrag/:id', (req, res) => {
-  req.params.id;
+  const eintragid = req.params.id;
+
+  delete json[eintragid];
+
+  console.log(eintrag);
+  res.status(201).json(eintrag);
 });
 
 app.listen(3000);
