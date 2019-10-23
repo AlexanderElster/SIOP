@@ -34,7 +34,7 @@ app.post('/eintrag', (req, res) => {
 app.delete('/eintrag/:id', (req, res) => {
   const eintragid = req.params.id;
 
-  delete json[eintragid];
+  eintrag.splice(eintragid , 1);
 
   console.log(eintrag);
   res.status(201).json(eintrag);

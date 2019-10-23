@@ -1,11 +1,10 @@
 .column#linkespalte{
   float: left;
-  width: 75%;
+  width: 15%;
 }
-.column#spalterechts{
+.column#rechtespalte{
   float: left;
-  width: 25%;
-  vertical-align: middle;
+  width: 85%;
 }
 #eintraege {
   margin-left: auto;

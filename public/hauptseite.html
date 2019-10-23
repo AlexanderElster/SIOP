@@ -20,14 +20,32 @@
     </span>
 
     <div class="row">
-        <div class="column" id="linkespalte">
+            <div class="column" id="linkespalte">
+                    <form id="neuerEintrag">
+                        Bezeichnung: </br> <input type="text" name="bezeichnung" id ="bezeichnung" required>
+                        </br>
+                        Beschreibung: </br> <input type="text" name="beschreibung" id ="beschreibung" required>
+                        </br>
+                        Ort: </br> <input type="text" name="ort" id ="ort" required>
+                        </br>
+                        Benutzer: </br> <input type="text" name="benutzer" id ="benutzer" required>
+                        </br>
+                        Kategorie: </br> <input type="text" name="kategorie" id ="kategorie" required>
+                        </br>
+                        </br>
+                        <button onclick="window.location.reload();" type="submit" name="hinzufuegen" value="Hinzufügen">Hinzufügen</button>
+                    </form>
+                    <button onclick="loeschen(0);">Löschen</button>
+                    </span>
+                </div>
+        <div class="column" id="rechtespalte">
 
             <span id="TabelleEintraege">
-                <table id="eintraege" border="solid-black"></table>
+                <table id="eintraege" border="solid-black" style="margin-left:15px;"></table>
             </span>
 
             <script>
-
+                var count = 0;
                 var eintraege = document.getElementById("eintraege");
                 let i = 0;
 
@@ -36,11 +54,23 @@
                 }).then(eintrag => {
                     eintrag.forEach(eintrag => {
 
-                        var button = document.createElement("button");
-                        button.type = "submit";
-                        button.id = eintrag.id;
-                        button.innerText = "Löschen";
-                        
+                        var buttonAendern = document.createElement("button");
+                        buttonAendern.type = "submit";
+                        buttonAendern.id = count;
+                        count++;
+                        buttonAendern.innerText = "Ändern";
+                        buttonAendern.addEventListener('click', function() {
+                            loeschen(buttonAendern.id);
+                        }, false);
+
+                        var buttonLoeschen = document.createElement("button");
+                        buttonLoeschen.type = "submit";
+                        buttonLoeschen.id = count;
+                        count++;
+                        buttonLoeschen.innerText = "Löschen";
+                        buttonLoeschen.addEventListener('click', function() {
+                            loeschen(buttonLoeschen.id);
+                        }, false);
 
                         var neueZeile = eintraege.insertRow(i);
                         i++;
@@ -50,39 +80,22 @@
                         var neueZelle3 = neueZeile.insertCell(3);
                         var neueZelle4 = neueZeile.insertCell(4);
                         var neueZelle5 = neueZeile.insertCell(5);
+                        var neueZelle6 = neueZeile.insertCell(6);
 
                         neueZelle0.innerHTML = eintrag.bezeichnung;
                         neueZelle1.innerHTML = eintrag.beschreibung;
                         neueZelle2.innerHTML = eintrag.ort;
                         neueZelle3.innerHTML = eintrag.benutzer;
                         neueZelle4.innerHTML = eintrag.kategorie;
-                        neueZelle5.appendChild(button);
+                        neueZelle5.appendChild(buttonAendern);
+                        neueZelle6.appendChild(buttonLoeschen);
 
                     });
                 });
             </script>
             <span>
         </div>
-        <div class="column" id="rechtespalte">
-            <form id="neuerEintrag">
-                Bezeichnung: </br> <input type="text" name="bezeichnung" id ="bezeichnung" required>
-                </br>
-                Beschreibung: </br> <input type="text" name="beschreibung" id ="beschreibung" required>
-                </br>
-                Ort: </br> <input type="text" name="ort" id ="ort" required>
-                </br>
-                Benutzer: </br> <input type="text" name="benutzer" id ="benutzer" required>
-                </br>
-                Kategorie: </br> <input type="text" name="kategorie" id ="kategorie" required>
-                </br>
-                </br>
-                <button onclick="window.location.reload();" type="submit" name="hinzufuegen" value="Hinzufügen">Hinzufügen</button>
-            
-            </form>
-            </span>
-        </div>
     </div>
-    <button onclick = "loeschen(11); window.location.reload();"></button>
     <script>
         const form = document.querySelector('#neuerEintrag');
 
@@ -102,15 +115,17 @@
         });
     });
 
-    async function loeschen(id) {
-    await fetch('/eintrag/' + id, {
-        method : 'DELETE',
+    function loeschen(eintragid) {
+    fetch('/eintrag/' + eintragid, {
+      method: 'DELETE'
     })
     .then(res => res.json())
     .then(eintrag => {
-        console.log(eintrag);
+      console.log(eintrag);
+      location.reload(true);
     });
-}
+  }
+
     </script>
 </body>
 
