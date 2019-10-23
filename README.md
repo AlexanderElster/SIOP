@@ -28,3 +28,9 @@ Die HTML-Elemente der Webseite verwenden entsprechende CSS-Dateien, um ein anspr
 REST API mit Node.js und Express
 
 # Frontend
+
+- Startseite zum Einloggen und zum Registrieren
+- Startseite beinhaltet Logo und Projektname
+- Meinungen zur Anwendung können per Mail gesendet werden
+- Hinzufügen und Ändern von Einträgen durch verschiedene Masken
+- Zugriff auf das BackEnd über die Fetch API
