@@ -40,4 +40,32 @@ app.delete('/eintrag/:id', (req, res) => {
   res.status(201).json(eintrag);
 });
 
+app.put('/eintrag/:id', (req, res) => {
+  const geaenderterEintrag = req.body;
+  let eintragid = req.params.id;
+
+  let eintragObj = eintrag[eintragId];
+  if (eintragObj === undefined || eintragObj === null) {
+    res.status(404).json({"error": "Eintrag not found!"});
+  } else {
+
+    eintragObj.bezeichnung = geanderterEintrag.bezeichnung;
+    eintragObj.beschreibung = geanderterEintrag.beschreibung;
+    eintragObj.ort = geanderterEintrag.ort;
+    eintragObj.benutzer = geandeterEintrag.benutzer;
+    eintragObj.kategorie = geandeterEintrag.kategorie;
+
+    tickets.splice(eintragid, 1, eintragObj);
+
+    console.log(eintrag);
+    res.status(200).json(eintrag);
+  }
+});
+
+app.get('/eintrag/:id', (req, res) => {
+  let data = eintrag[req.params.id];
+  res.json({data});
+});
+
+
 app.listen(3000);

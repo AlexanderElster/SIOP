@@ -35,7 +35,6 @@
                         </br>
                         <button onclick="window.location.reload();" type="submit" name="hinzufuegen" value="Hinzufügen">Hinzufügen</button>
                     </form>
-                    <button onclick="loeschen(0);">Löschen</button>
                     </span>
                 </div>
         <div class="column" id="rechtespalte">
@@ -45,7 +44,8 @@
             </span>
 
             <script>
-                var count = 0;
+                var zeahlerAendern = 0;
+                var zeahlerLoeschen = 0;
                 var eintraege = document.getElementById("eintraege");
                 let i = 0;
 
@@ -56,17 +56,17 @@
 
                         var buttonAendern = document.createElement("button");
                         buttonAendern.type = "submit";
-                        buttonAendern.id = count;
-                        count++;
+                        buttonAendern.id = zeahlerAendern;
+                        zeahlerAendern++;
                         buttonAendern.innerText = "Ändern";
                         buttonAendern.addEventListener('click', function() {
-                            loeschen(buttonAendern.id);
+                            window.location = "/EintragAendern.html?eid=" + buttonAendern.id;
                         }, false);
 
                         var buttonLoeschen = document.createElement("button");
                         buttonLoeschen.type = "submit";
-                        buttonLoeschen.id = count;
-                        count++;
+                        buttonLoeschen.id = zeahlerLoeschen;
+                        zeahlerLoeschen++;
                         buttonLoeschen.innerText = "Löschen";
                         buttonLoeschen.addEventListener('click', function() {
                             loeschen(buttonLoeschen.id);
