@@ -139,16 +139,36 @@
         </div>
     </div>
     <script>
-
-        var zaehlerBenutzer;
-
         fetch("/benutzer").then(res => {
             return res.json();
         }).then(benutzer => {
-            benutzer.forEach(benutzer => {
-                zaehlerBenutzer++;
-            })
-        })
+            zaehlerBenutzer = benutzer.length;
+            const formReg = document.querySelector("#registrieren");
+            formReg.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+
+                if (document.querySelector("#pwReg").value === document.querySelector("#pwReg2").value) {
+
+                    fetch("/benutzer", {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({ id: zaehlerBenutzer + 1, email: document.querySelector("#emailReg").value, name: document.querySelector("#nameReg").value, passwort: document.querySelector("#pwReg").value, coins: 0 })
+                    }).then(res => {
+                        return res.json();
+                    });
+                    window.location.href = "/index.html"
+                }
+                else {
+                    console.log("Passwörter stimmen nicht überein!")
+                }
+            });
+
+        });
+
+
 
         const form = document.querySelector("#login");
         form.addEventListener('submit', (event) => {
@@ -174,27 +194,6 @@
             })
         });
 
-        const formReg = document.querySelector("#registrieren");
-        formReg.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            if (document.querySelector("#pwReg").value === document.querySelector("#pwReg2").value) {
-
-                fetch("/benutzer", {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: zaehlerBenutzer + 1, email: document.querySelector("#emailReg").value, name: document.querySelector("#nameReg").value, passwort: document.querySelector("#pwReg").value, coins: 0 })
-                }).then(res => {
-                    return res.json();
-                });
-                window.location.href = "/index.html"
-            }
-            else {
-                console.log("Passwörter stimmen nicht überein!")
-            }
-        });
     </script>
 </body>
 <footer>

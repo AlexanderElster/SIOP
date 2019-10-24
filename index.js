@@ -38,7 +38,6 @@ benutzer.forEach(ben => {
   if (b1 === undefined) {
     res.status(404);
   }
-  console.log(b1);
 
   res.json(b1);
 });
