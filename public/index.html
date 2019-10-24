@@ -73,13 +73,17 @@
                 <p style="color: black;">1
                 </p>
             </div>
-            <form>
+            <form id="registrieren">
                 </br>
                 </br>
                 <h3>Want to become a member?</h3>
                 <h3>Sign in here for free!</h3>
                 E-Mail:</br>
-                <input type="text" name="emailReg" id ="#emailReg" required>
+                <input type="text" name="emailReg" id="emailReg" required>
+                </br>
+                </br>
+                Username:</br>
+                <input type="text" name="nameReg" id="nameReg" required>
                 </br>
                 </br>
                 New password:</br>
@@ -135,6 +139,17 @@
         </div>
     </div>
     <script>
+
+        var zaehlerBenutzer;
+
+        fetch("/benutzer").then(res => {
+            return res.json();
+        }).then(benutzer => {
+            benutzer.forEach(benutzer => {
+                zaehlerBenutzer++;
+            })
+        })
+
         const form = document.querySelector("#login");
         form.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -157,6 +172,28 @@
                     }
                 }
             })
+        });
+
+        const formReg = document.querySelector("#registrieren");
+        formReg.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            if (document.querySelector("#pwReg").value === document.querySelector("#pwReg2").value) {
+
+                fetch("/benutzer", {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: zaehlerBenutzer + 1, email: document.querySelector("#emailReg").value, name: document.querySelector("#nameReg").value, passwort: document.querySelector("#pwReg").value, coins: 0 })
+                }).then(res => {
+                    return res.json();
+                });
+                window.location.href = "/index.html"
+            }
+            else {
+                console.log("Passwörter stimmen nicht überein!")
+            }
         });
     </script>
 </body>
