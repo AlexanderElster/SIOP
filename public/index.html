@@ -2,8 +2,10 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" href="siopicon.png">
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="hauptseite.js"></script>
+
     <title>
         SIOP
     </title>
@@ -16,127 +18,115 @@
             <p style="color:bisque;">sharing is our passion.</p>
         </div>
     </span>
+
     <div class="row">
-        <div class="column" id="spalte1">
-            <h2 style="background-color: rgba(7, 6, 4, 0.35)">We are proud to be the first memberbased plattform that
-                shares everything people want to share.</h2>
-            </br>
-            <p style="background-color: rgba(7, 6, 4, 0.35)">Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-                vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-                est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                sit amet.
+            <div class="column" id="linkespalte">
+                    <form id="neuerEintrag">
+                        Bezeichnung: </br> <input type="text" name="bezeichnung" id ="bezeichnung" required>
+                        </br>
+                        Beschreibung: </br> <input type="text" name="beschreibung" id ="beschreibung" required>
+                        </br>
+                        Ort: </br> <input type="text" name="ort" id ="ort" required>
+                        </br>
+                        Benutzer: </br> <input type="text" name="benutzer" id ="benutzer" required>
+                        </br>
+                        Kategorie: </br> <input type="text" name="kategorie" id ="kategorie" required>
+                        </br>
+                        </br>
+                        <button onclick="window.location.reload();" type="submit" name="hinzufuegen" value="Hinzufügen">Hinzufügen</button>
+                    </form>
+                    </span>
+                </div>
+        <div class="column" id="rechtespalte">
 
-                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
-                dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-                luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
-                consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                erat volutpat.
+            <span id="TabelleEintraege">
+                <table id="eintraege" border="solid-black" style="margin-left:15px;"></table>
+            </span>
 
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
-                ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
-                qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+            <script>
+                var zeahlerAendern = 0;
+                var zeahlerLoeschen = 0;
+                var eintraege = document.getElementById("eintraege");
+                let i = 0;
 
-                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
-                facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-                nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-            </p>
+                fetch("/eintrag").then(res => {
+                    return res.json();
+                }).then(eintrag => {
+                    eintrag.forEach(eintrag => {
 
-        </div>
-        <div class="column" id="spalte2">
-            </br>
-            <form>
-                <h3>Login and start sharing!</h3>
-                E-Mail:</br>
+                        var buttonAendern = document.createElement("button");
+                        buttonAendern.type = "submit";
+                        buttonAendern.id = zeahlerAendern;
+                        zeahlerAendern++;
+                        buttonAendern.innerText = "Ändern";
+                        buttonAendern.addEventListener('click', function() {
+                            window.location = "/EintragAendern.html?eid=" + buttonAendern.id;
+                        }, false);
 
-                <input type="text" name="E-Mail" required>
-                </br>
-                </br>
-                Password:</br>
-                <input type="password" name="Passwort" id="anmeldung" required>
-                </br>
-                </br>
-                <input type="submit" name="login" value="Login">
-                </br>
+                        var buttonLoeschen = document.createElement("button");
+                        buttonLoeschen.type = "submit";
+                        buttonLoeschen.id = zeahlerLoeschen;
+                        zeahlerLoeschen++;
+                        buttonLoeschen.innerText = "Löschen";
+                        buttonLoeschen.addEventListener('click', function() {
+                            loeschen(buttonLoeschen.id);
+                        }, false);
 
-            </form>
-            </br>
-            </br>
-            <div height=3px style="background-color: black;">
-                <p style="color: black;">1
-                </p>
-            </div>
-            <form>
-                </br>
-                </br>
-                <h3>Want to become a member?</h3>
-                <h3>Sign in here for free!</h3>
-                E-Mail:</br>
-                <input type="text" name="E-Mail" required>
-                </br>
-                </br>
-                New password:</br>
-                <input type="password" name="Passwort" id="anmeldung" required>
-                </br>
-                </br>
-                New password again:</br>
-                <input type="password" name="Passwort" id="anmeldung" required>
-                </br>
-                </br>
-                <input type="submit" name="registrieren" value="Registrieren">
-                </br>
-                </br>
-                </br>
-                </br>
-                <p style="margin-left: 0%; color: black;">You can even share your opinion on SIOP:</p>
-                <a href="">sharing-is-our-passion@siop.com</a>
-            </form>
-        </div>
-        <div class="column" id="spalte3">
+                        var neueZeile = eintraege.insertRow(i);
+                        i++;
+                        var neueZelle0 = neueZeile.insertCell(0);
+                        var neueZelle1 = neueZeile.insertCell(1);
+                        var neueZelle2 = neueZeile.insertCell(2);
+                        var neueZelle3 = neueZeile.insertCell(3);
+                        var neueZelle4 = neueZeile.insertCell(4);
+                        var neueZelle5 = neueZeile.insertCell(5);
+                        var neueZelle6 = neueZeile.insertCell(6);
 
-            <h2 style="background-color: rgba(7, 6, 4, 0.35)">
-                Here are a few example of what you can either share if you own it, or rent if you need it.
-            </h2>
-            </br>
-            <p style="background-color: rgba(7, 6, 4, 0.35)">Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
-                vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-                est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                sit amet.
+                        neueZelle0.innerHTML = eintrag.bezeichnung;
+                        neueZelle1.innerHTML = eintrag.beschreibung;
+                        neueZelle2.innerHTML = eintrag.ort;
+                        neueZelle3.innerHTML = eintrag.benutzer;
+                        neueZelle4.innerHTML = eintrag.kategorie;
+                        neueZelle5.appendChild(buttonAendern);
+                        neueZelle6.appendChild(buttonLoeschen);
 
-                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
-                dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-                luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
-                consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                erat volutpat.
-
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
-                ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
-                qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-
-                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat
-                facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
-                nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-            </p>
+                    });
+                });
+            </script>
+            <span>
         </div>
     </div>
-</body>
-<footer">
+    <script>
+        const form = document.querySelector('#neuerEintrag');
 
-    </footer>
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const values = Object.fromEntries(new FormData(event.target));
+
+        fetch("/eintrag", {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({id : 11, bezeichnung : document.querySelector("#bezeichnung").value , beschreibung: document.querySelector("#beschreibung").value, ort : document.querySelector("#ort").value, benutzer : document.querySelector("#benutzer").value, kategorie : document.querySelector("#kategorie").value})
+        }).then(res => {
+            return res.json();
+        });
+    });
+
+    function loeschen(eintragid) {
+    fetch('/eintrag/' + eintragid, {
+      method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(eintrag => {
+      console.log(eintrag);
+      location.reload(true);
+    });
+  }
+
+    </script>
+</body>
 
 </html>

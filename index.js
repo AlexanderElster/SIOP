@@ -48,10 +48,32 @@ app.delete('/eintrag/:id', (req, res) => {
 });
 
 app.put('/eintrag/:id', (req, res) => {
-  let eintragid = req.params.id;
+  
+  const geanderterEintrag = req.body;
+  console.log(geanderterEintrag);
+  let eintragId = req.params.id;
+
+  let e1 = eintrag[eintragId];
+
+  if (e1 === undefined || e1 === null) {
+    res.status(404).json({"error": "Eintrag nicht gefunden!"});
+  }
+  else {
+    e1.bezeichnung = geanderterEintrag.bezeichnung;
+    e1.beschreibung = geanderterEintrag.beschreibung;
+    e1.ort = geanderterEintrag.ort;
+    e1.benutzer = geanderterEintrag.benutzer;
+    e1.kategorie = geanderterEintrag.kategorie; 
+
+    eintrag.splice(eintragId, 1, e1);
+
+    console.log(e1);
+    console.log(eintrag);
+    res.status(200).json(eintrag);
+  }
+
 
   
 });
-
 
 app.listen(3000);
