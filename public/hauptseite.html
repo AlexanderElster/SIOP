@@ -4,7 +4,6 @@
 <head>
     <link rel="icon" href="siopicon.png">
     <link rel="stylesheet" href="stylesheet.css">
-    <script src="hauptseite.js"></script>
 
     <title>
         SIOP
@@ -42,9 +41,11 @@
             <span id="TabelleEintraege">
                 <table id="eintraege" border="solid-black" style="margin-left:15px;"></table>
             </span>
-
-            <script>
-                var zeahlerAendern = 0;
+            <span>
+        </div>
+    </div>
+    <script>
+        var zeahlerAendern = 0;
                 var zeahlerLoeschen = 0;
                 var eintraege = document.getElementById("eintraege");
                 let i = 0;
@@ -92,12 +93,8 @@
 
                     });
                 });
-            </script>
-            <span>
-        </div>
-    </div>
-    <script>
-        const form = document.querySelector('#neuerEintrag');
+
+                const form = document.querySelector('#neuerEintrag');
 
         form.addEventListener('submit', (event) => {
             event.preventDefault();
