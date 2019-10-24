@@ -62,6 +62,7 @@
                 Password:</br>
                 <input type="password" name="Passwort" id="pwLogin" required>
                 </br>
+                <p id="fehler1"> </p>
                 </br>
                 <input type="submit" name="login" value="Login">
                 </br>
@@ -93,6 +94,7 @@
                 New password again:</br>
                 <input type="password" name="pwReg2" id="pwReg2" required>
                 </br>
+                <p id="fehler2"></p>
                 </br>
                 <input type="submit" name="registrieren" value="Registrieren">
                 </br>
@@ -138,64 +140,64 @@
             </p>
         </div>
     </div>
-    <script>
-        fetch("/benutzer").then(res => {
-            return res.json();
-        }).then(benutzer => {
-            zaehlerBenutzer = benutzer.length;
-            const formReg = document.querySelector("#registrieren");
-            formReg.addEventListener('submit', (event) => {
-                event.preventDefault();
-
-
-                if (document.querySelector("#pwReg").value === document.querySelector("#pwReg2").value) {
-
-                    fetch("/benutzer", {
-                        method: 'POST',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify({ id: zaehlerBenutzer + 1, email: document.querySelector("#emailReg").value, name: document.querySelector("#nameReg").value, passwort: document.querySelector("#pwReg").value, coins: 0 })
-                    }).then(res => {
-                        return res.json();
-                    });
-                    window.location.href = "/index.html"
-                }
-                else {
-                    console.log("Passwörter stimmen nicht überein!")
-                }
-            });
-
-        });
-
-
-
-        const form = document.querySelector("#login");
-        form.addEventListener('submit', (event) => {
+</body>
+<script>
+    fetch("/benutzer").then(res => {
+        return res.json();
+    }).then(benutzer => {
+        zaehlerBenutzer = benutzer.length;
+        const formReg = document.querySelector("#registrieren");
+        formReg.addEventListener('submit', (event) => {
             event.preventDefault();
 
-            const email = document.querySelector("#emailLogin").value;
-            const pw = document.querySelector("#pwLogin").value;
 
-            fetch("/benutzer/" + email).then(res => {
-                return res.json();
-            }).then(b1 => {
-                if (b1 === undefined || b1 === null) {
-                    res.status(404).json({ "error": "E-Mail nicht gefunden!" })
-                }
-                else {
-                    if (pw === b1.passwort) {
-                        window.location.href = "/hauptseite.html?uid=" + b1.id;
-                    }
-                    else {
-                        console.log("Falsches PW");
-                    }
-                }
-            })
+            if (document.querySelector("#pwReg").value === document.querySelector("#pwReg2").value) {
+
+                fetch("/benutzer", {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: zaehlerBenutzer + 1, email: document.querySelector("#emailReg").value, name: document.querySelector("#nameReg").value, passwort: document.querySelector("#pwReg").value, coins: 0 })
+                }).then(res => {
+                    return res.json();
+                });
+                window.location.href = "/index.html"
+            }
+            else {
+                document.getElementById("fehler2").innerHTML = "Die Passwörter stimmen nicht überein!";
+            }
         });
 
-    </script>
-</body>
+    });
+
+
+
+    const form = document.querySelector("#login");
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const email = document.querySelector("#emailLogin").value;
+        const pw = document.querySelector("#pwLogin").value;
+
+        fetch("/benutzer/" + email).then(res => {
+            return res.json();
+        }).then(b1 => {
+            if (b1 === undefined || b1 === null) {
+                res.status(404).json({ "error": "E-Mail nicht gefunden!" })
+            }
+            else {
+                if (pw === b1.passwort) {
+                    window.location.href = "/hauptseite.html?uid=" + b1.id;
+                }
+                else {
+                    document.getElementById("fehler1").innerHTML = "Falsches Passwort!";
+                }
+            }
+        })
+    });
+
+</script>
 <footer>
 
 </footer>
