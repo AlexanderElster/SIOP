@@ -97,14 +97,17 @@ app.put('/eintrag/:id', (req, res) => {
   }
 });
 
-app.get('/benutzer/:id', (req,res) => {
+app.get('/benutzer1/:id', (req,res) => {
   const id = req.params.id;
   console.log(id);
-  let b1 = benutzer[id];
-  
-  console.log(b1);
+  let b1 = benutzer[id - 1];
 
+if (b1 === undefined) {
+  res.status(404);
+}
+else {
   res.json(b1);
+}
 });
 
 app.listen(3000);
