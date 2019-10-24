@@ -40,10 +40,8 @@
             var url_string = window.location.href;
             var url = new URL(url_string);
             var id = url.searchParams.get("eid");
-            console.log(id);
             let response = await fetch('/eintrag/' + id);
             let daten = await response.json().then(resData => { return resData });
-            console.log(daten);
             return daten;
         }
 
@@ -65,7 +63,6 @@
             aenderEintrag.benutzer = document.querySelector("#benutzer").value;
             aenderEintrag.kategorie = document.querySelector("#kategorie").value;
 
-            console.log(aenderEintrag);
             fetch('/eintrag/' + id, {
                 method: 'PUT',
                 headers: {
@@ -75,7 +72,6 @@
             })
                 .then(res => res.json())
                 .then(eintrag => {
-                    console.log(eintrag);
                 });
         })
 
