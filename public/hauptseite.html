@@ -14,7 +14,7 @@
     <span id="Kopfzeile">
         <div align="center" width="100%" height="100px" style="background-color: black">
             <img style="align-self: center;" width="10%" height="10%" src="./Siop_Icon_Beige.png">
-            <aside style="float: right;" id="coins" ><img style= "margin-top: 50%;"src="/coins.jpg" width="50px" height="50px" alt="coins"></aside>
+            <aside style="float: right;" id="coins" ><p id="coinsanzahl" style="color: bisque;"></p><img style= "margin-top: 50%;"src="/coins.jpg" width="50px" height="50px" alt="coins"></aside>
             <p style="color:bisque; align-self: center;">sharing is our passion.</p>
             
         </div>
@@ -65,6 +65,10 @@
         </div>
     </div>
     <script>
+        var url_string = window.location.href;
+            var url = new URL(url_string);
+            var uid = url.searchParams.get("uid");
+
         var zeahlerAendern = 0;
         var zeahlerLoeschen = 0;
         var eintraege = document.getElementById("eintraege");
@@ -140,7 +144,14 @@
                     location.reload(true);
                 });
         }
-
+         fetch("/benutzer/"+uid).then(res =>{
+            console.log(uid); 
+            return res.json();
+         }).then(b1 =>{
+            document.getElementById("coinsanzahl").innerHTML = b1.coins;
+         })
+             
+         
     </script>
 </body>
 

@@ -86,4 +86,14 @@ app.put('/eintrag/:id', (req, res) => {
   }
 });
 
+app.get('/benutzer/:id', (req,res) => {
+  const id = req.params.id;
+  console.log(id);
+  let b1 = benutzer[id];
+  
+  console.log(b1);
+
+  res.json(b1);
+});
+
 app.listen(3000);
