@@ -71,6 +71,7 @@
 
         var zeahlerAendern = 0;
         var zeahlerLoeschen = 0;
+        var zahelerEintraege = 0;
         var eintraege = document.getElementById("eintraege");
         let i = 0;
 
@@ -115,6 +116,7 @@
                 neueZelle5.appendChild(buttonAendern);
                 neueZelle6.appendChild(buttonLoeschen);
 
+                zahelerEintraege++;
             });
         });
 
@@ -128,7 +130,7 @@
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({ id: 11, bezeichnung: document.querySelector("#bezeichnung").value, beschreibung: document.querySelector("#beschreibung").value, ort: document.querySelector("#ort").value, benutzer: document.querySelector("#benutzer").value, kategorie: document.querySelector("#kategorie").value })
+                body: JSON.stringify({ id: zahelerEintraege + 1, bezeichnung: document.querySelector("#bezeichnung").value, beschreibung: document.querySelector("#beschreibung").value, ort: document.querySelector("#ort").value, benutzer: document.querySelector("#benutzer").value, kategorie: document.querySelector("#kategorie").value })
             }).then(res => {
                 return res.json();
             });

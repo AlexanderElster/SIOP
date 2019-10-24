@@ -34,7 +34,10 @@ benutzer.forEach(ben => {
     b1 = ben;
   }
 });
-  console.log(b1);
+
+  if (b1 === undefined) {
+    res.status(404);
+  }
 
   res.json(b1);
 });
@@ -50,6 +53,14 @@ app.post('/eintrag', (req, res) => {
 
   res.status(201).json(eintrag);
 });
+
+app.post('/benutzer', (req, res) => {
+  const neuerBenutzer = req.body;
+
+  benutzer.push(neuerBenutzer);
+
+  res.status(201).json(benutzer)
+})
 
 app.delete('/eintrag/:id', (req, res) => {
   const eintragid = req.params.id;
