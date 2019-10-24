@@ -1,6 +1,5 @@
 [
-    { "id": 1, "name": "Herbert", "passwort":"12345", "coins": 12},
-    { "id": 2, "name": "Helga", "passwort" :"54321" , "coins": 150},
-    { "id": 3, "name": "Alex", "passwort" :"Elefant" , "coins": 50}
-
+    { "id": 1, "email": "herbert@herbert.de", "name": "Herbert", "passwort":"12345", "coins": 12},
+    { "id": 2, "email": "helga@helga.de", "name": "Helga", "passwort" :"54321" , "coins": 150},
+    { "id": 3, "email": "alex@alex.de", "name": "Alex", "passwort" :"Elefant" , "coins": 50}
   ]

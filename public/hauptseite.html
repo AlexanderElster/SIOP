@@ -23,7 +23,8 @@
     <div class="row">
             <div class="column" id="linkespalte">
                     <h2 style="float: left;">Verleihen:</h2>
-                    <form id="neuerEintrag">
+                    <form style="margin-top:51px;" id="neuerEintrag">
+                    </br>
                         Bezeichnung: </br> <input type="text" name="bezeichnung" id ="bezeichnung" required>
                         </br>
                         Beschreibung: </br> <input type="text" name="beschreibung" id ="beschreibung" required>
@@ -42,7 +43,7 @@
         <div class="column" id="rechtespalte">
 
             <span id="TabelleEintraege">
-                <h2>Diese Dinge warten darauf ausgeliehen zu werden:</h2>
+                <h2 style="margin-right:90px;">Diese Dinge warten darauf ausgeliehen zu werden:</h2>
                 <table  border="solid-black" style="margin-left:15px; background-color:black; opacity: 0.8; color: white;">
                     <thead>
                         <tr>
@@ -64,83 +65,80 @@
     </div>
     <script>
         var zeahlerAendern = 0;
-                var zeahlerLoeschen = 0;
-                var eintraege = document.getElementById("eintraege");
-                let i = 0;
+        var zeahlerLoeschen = 0;
+        var eintraege = document.getElementById("eintraege");
+        let i = 0;
 
-                fetch("/eintrag").then(res => {
-                    return res.json();
-                    
-                }).then(eintrag => {
-                    eintrag.forEach(eintrag => {
+        fetch("/eintrag").then(res => {
+            return res.json();
+        }).then(eintrag => {
+            eintrag.forEach(eintrag => {
 
-                        var buttonAendern = document.createElement("button");
-                        buttonAendern.type = "submit";
-                        buttonAendern.id = zeahlerAendern;
-                        zeahlerAendern++;
-                        buttonAendern.innerText = "Ändern";
-                        buttonAendern.addEventListener('click', function() {
-                            window.location = "/EintragAendern.html?eid=" + buttonAendern.id;
-                        }, false);
+                var buttonAendern = document.createElement("button");
+                buttonAendern.type = "submit";
+                buttonAendern.id = zeahlerAendern;
+                zeahlerAendern++;
+                buttonAendern.innerText = "Ändern";
+                buttonAendern.addEventListener('click', function () {
+                    window.location = "/EintragAendern.html?eid=" + buttonAendern.id;
+                }, false);
 
-                        var buttonLoeschen = document.createElement("button");
-                        buttonLoeschen.type = "submit";
-                        buttonLoeschen.id = zeahlerLoeschen;
-                        zeahlerLoeschen++;
-                        buttonLoeschen.innerText = "Löschen";
-                        buttonLoeschen.addEventListener('click', function() {
-                            loeschen(buttonLoeschen.id);
-                        }, false);
+                var buttonLoeschen = document.createElement("button");
+                buttonLoeschen.type = "submit";
+                buttonLoeschen.id = zeahlerLoeschen;
+                zeahlerLoeschen++;
+                buttonLoeschen.innerText = "Löschen";
+                buttonLoeschen.addEventListener('click', function () {
+                    loeschen(buttonLoeschen.id);
+                }, false);
 
-                        var neueZeile = eintraege.insertRow(i);
-                        i++;
-                        var neueZelle0 = neueZeile.insertCell(0);
-                        var neueZelle1 = neueZeile.insertCell(1);
-                        var neueZelle2 = neueZeile.insertCell(2);
-                        var neueZelle3 = neueZeile.insertCell(3);
-                        var neueZelle4 = neueZeile.insertCell(4);
-                        var neueZelle5 = neueZeile.insertCell(5);
-                        var neueZelle6 = neueZeile.insertCell(6);
+                var neueZeile = eintraege.insertRow(i);
+                i++;
+                var neueZelle0 = neueZeile.insertCell(0);
+                var neueZelle1 = neueZeile.insertCell(1);
+                var neueZelle2 = neueZeile.insertCell(2);
+                var neueZelle3 = neueZeile.insertCell(3);
+                var neueZelle4 = neueZeile.insertCell(4);
+                var neueZelle5 = neueZeile.insertCell(5);
+                var neueZelle6 = neueZeile.insertCell(6);
 
-                        neueZelle0.innerHTML = eintrag.bezeichnung;
-                        neueZelle1.innerHTML = eintrag.beschreibung;
-                        neueZelle2.innerHTML = eintrag.ort;
-                        neueZelle3.innerHTML = eintrag.benutzer;
-                        neueZelle4.innerHTML = eintrag.kategorie;
-                        neueZelle5.appendChild(buttonAendern);
-                        neueZelle6.appendChild(buttonLoeschen);
+                neueZelle0.innerHTML = eintrag.bezeichnung;
+                neueZelle1.innerHTML = eintrag.beschreibung;
+                neueZelle2.innerHTML = eintrag.ort;
+                neueZelle3.innerHTML = eintrag.benutzer;
+                neueZelle4.innerHTML = eintrag.kategorie;
+                neueZelle5.appendChild(buttonAendern);
+                neueZelle6.appendChild(buttonLoeschen);
 
-                    });
-                });
+            });
+        });
 
-                const form = document.querySelector('#neuerEintrag');
+        const form = document.querySelector('#neuerEintrag');
 
         form.addEventListener('submit', (event) => {
             event.preventDefault();
 
-            const values = Object.fromEntries(new FormData(event.target));
-
-        fetch("/eintrag", {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({id : 11, bezeichnung : document.querySelector("#bezeichnung").value , beschreibung: document.querySelector("#beschreibung").value, ort : document.querySelector("#ort").value, benutzer : document.querySelector("#benutzer").value, kategorie : document.querySelector("#kategorie").value})
-        }).then(res => {
-            return res.json();
+            fetch("/eintrag", {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({ id: 11, bezeichnung: document.querySelector("#bezeichnung").value, beschreibung: document.querySelector("#beschreibung").value, ort: document.querySelector("#ort").value, benutzer: document.querySelector("#benutzer").value, kategorie: document.querySelector("#kategorie").value })
+            }).then(res => {
+                return res.json();
+            });
         });
-    });
 
-    function loeschen(eintragid) {
-    fetch('/eintrag/' + eintragid, {
-      method: 'DELETE'
-    })
-    .then(res => res.json())
-    .then(eintrag => {
-      console.log(eintrag);
-      location.reload(true);
-    });
-  }
+        function loeschen(eintragid) {
+            fetch('/eintrag/' + eintragid, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(eintrag => {
+                    console.log(eintrag);
+                    location.reload(true);
+                });
+        }
 
     </script>
 </body>
