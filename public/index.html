@@ -52,15 +52,15 @@
         </div>
         <div class="column" id="spalte2">
             </br>
-            <form>
+            <form id="login">
                 <h3>Login and start sharing!</h3>
                 E-Mail:</br>
 
-                <input type="text" name="E-Mail" required>
+                <input type="text" name="E-Mail" id="emailLogin" required>
                 </br>
                 </br>
                 Password:</br>
-                <input type="password" name="Passwort" id="anmeldung" required>
+                <input type="password" name="Passwort" id="pwLogin" required>
                 </br>
                 </br>
                 <input type="submit" name="login" value="Login">
@@ -79,15 +79,15 @@
                 <h3>Want to become a member?</h3>
                 <h3>Sign in here for free!</h3>
                 E-Mail:</br>
-                <input type="text" name="E-Mail" required>
+                <input type="text" name="emailReg" id ="#emailReg" required>
                 </br>
                 </br>
                 New password:</br>
-                <input type="password" name="Passwort" id="anmeldung" required>
+                <input type="password" name="pwReg" id="pwReg" required>
                 </br>
                 </br>
                 New password again:</br>
-                <input type="password" name="Passwort" id="anmeldung" required>
+                <input type="password" name="pwReg2" id="pwReg2" required>
                 </br>
                 </br>
                 <input type="submit" name="registrieren" value="Registrieren">
@@ -134,9 +134,34 @@
             </p>
         </div>
     </div>
-</body>
-<footer">
+    <script>
+        const form = document.querySelector("#login");
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
 
-    </footer>
+            const email = document.querySelector("#emailLogin").value;
+            const pw = document.querySelector("#pwLogin").value;
+
+            fetch("/benutzer/" + email).then(res => {
+                return res.json();
+            }).then(b1 => {
+                if (b1 === undefined || b1 === null) {
+                    res.status(404).json({ "error": "E-Mail nicht gefunden!" })
+                }
+                else {
+                    if (pw === b1.passwort) {
+                        window.location.href = "/hauptseite.html?uid=" + b1.id;
+                    }
+                    else {
+                        console.log("Falsches PW");
+                    }
+                }
+            })
+        });
+    </script>
+</body>
+<footer>
+
+</footer>
 
 </html>

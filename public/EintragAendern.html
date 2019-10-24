@@ -4,7 +4,7 @@
 <head>
     <link rel="icon" href="siopicon.png">
     <link rel="stylesheet" href="stylesheet.css">
-    
+
 
     <title>
         SIOP
@@ -20,66 +20,66 @@
     </span>
 
     <form id="EintragAendern">
-            Bezeichnung: </br> <input type="text" name="bezeichnung" id ="bezeichnung" required>
-            </br>
-            Beschreibung: </br> <input type="text" name="beschreibung" id ="beschreibung" required>
-            </br>
-            Ort: </br> <input type="text" name="ort" id ="ort" required>
-            </br>
-            Benutzer: </br> <input type="text" name="benutzer" id ="benutzer" required>
-            </br>
-            Kategorie: </br> <input type="text" name="kategorie" id ="kategorie" required>
-            </br>
-            </br>
-            <button  type="submit" name="hinzufuegen" value="Hinzufügen">Hinzufügen</button>
-        </form>
-        
-        <script>
-            
-            async function getEintrag() {
-                var url_string = window.location.href;
-                var url = new URL(url_string);
-                var id = url.searchParams.get("eid");
-                console.log(id); 
-                let response = await fetch('/eintrag1/' + id);
-                let daten  = await response.json().then(resData => {return resData});
-                console.log(daten);
-                return daten;
-            }
+        Bezeichnung: </br> <input type="text" name="bezeichnung" id="bezeichnung" required>
+        </br>
+        Beschreibung: </br> <input type="text" name="beschreibung" id="beschreibung" required>
+        </br>
+        Ort: </br> <input type="text" name="ort" id="ort" required>
+        </br>
+        Benutzer: </br> <input type="text" name="benutzer" id="benutzer" required>
+        </br>
+        Kategorie: </br> <input type="text" name="kategorie" id="kategorie" required>
+        </br>
+        </br>
+        <button type="submit" name="EintragAendern" value="EintragAendern">EintragAendern</button>
+    </form>
 
-            const form = document.querySelector("#EintragAendern");
+    <script>
 
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
+        async function getEintrag() {
+            var url_string = window.location.href;
+            var url = new URL(url_string);
+            var id = url.searchParams.get("eid");
+            console.log(id);
+            let response = await fetch('/eintrag/' + id);
+            let daten = await response.json().then(resData => { return resData });
+            console.log(daten);
+            return daten;
+        }
 
-                const values = Object.fromEntries(new FormData(event.target));
+        const form = document.querySelector("#EintragAendern");
 
-                let aenderEintrag = getEintrag();
-                var url_string = window.location.href;
-                var url = new URL(url_string);
-                var id = url.searchParams.get("eid");
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
 
-                aenderEintrag.bezeichnung = document.querySelector("#bezeichnung").value;
-                aenderEintrag.beschreibung = document.querySelector("#beschreibung").value;
-                aenderEintrag.ort = document.querySelector("#ort").value;
-                aenderEintrag.benutzer = document.querySelector("#benutzer").value;
-                aenderEintrag.kategorie = document.querySelector("#kategorie").value;
+            const values = Object.fromEntries(new FormData(event.target));
 
-                console.log(aenderEintrag);
-                fetch('/eintrag/' + id, {
+            let aenderEintrag = getEintrag();
+            var url_string = window.location.href;
+            var url = new URL(url_string);
+            var id = url.searchParams.get("eid");
+
+            aenderEintrag.bezeichnung = document.querySelector("#bezeichnung").value;
+            aenderEintrag.beschreibung = document.querySelector("#beschreibung").value;
+            aenderEintrag.ort = document.querySelector("#ort").value;
+            aenderEintrag.benutzer = document.querySelector("#benutzer").value;
+            aenderEintrag.kategorie = document.querySelector("#kategorie").value;
+
+            console.log(aenderEintrag);
+            fetch('/eintrag/' + id, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
-                    },
-            body: JSON.stringify(aenderEintrag)
+                },
+                body: JSON.stringify(aenderEintrag)
             })
                 .then(res => res.json())
                 .then(eintrag => {
-                console.log(eintrag);
-            });
-            })
+                    console.log(eintrag);
+                });
+        })
 
-        </script>
+    </script>
 </body>
 
 </html>
