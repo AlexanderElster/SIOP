@@ -84,7 +84,10 @@
                 zeahlerAendern++;
                 buttonAendern.innerText = "Ändern";
                 buttonAendern.addEventListener('click', function () {
-                    window.location = "/EintragAendern.html?eid=" + buttonAendern.id;
+                    let url_string = window.location.href;
+                    let url = new URL(url_string);
+                    let uid = url.searchParams.get("uid");
+                    window.location = "/EintragAendern.html?eid=" + buttonAendern.id + "&uid=" + uid;
                 }, false);
 
                 var buttonLoeschen = document.createElement("button");

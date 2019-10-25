@@ -72,6 +72,10 @@
             })
                 .then(res => res.json())
                 .then(eintrag => {
+                    var url_string = window.location.href;
+                    var url = new URL(url_string);
+                    var uid = url.searchParams.get("uid");
+                    window.location.href = "/hauptseite.html?uid=" + uid;
                 });
         })
 
